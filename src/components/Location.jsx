@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MapPin, Navigation, Clock, ShieldCheck } from "lucide-react";
 
@@ -26,8 +25,7 @@ const locationsData = {
   }
 };
 
-export default function Location() {
-  const [activeLocation, setActiveLocation] = useState("safa");
+export default function Location({ activeLocation, setActiveLocation }) {
 
   return (
     <section id="location" className="py-24 bg-[#f9f9f9] relative overflow-hidden">

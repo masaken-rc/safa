@@ -77,7 +77,7 @@ export default function Footer() {
             <ul className="space-y-4 text-sm text-gray-400">
               <li className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-[#b8860b] shrink-0" />
-                <span className="audiowide-regular" dir="ltr">+966 509996115</span>
+                <span className="audiowide-regular" dir="ltr">+966 538159915</span>
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-[#b8860b] shrink-0" />
@@ -97,7 +97,7 @@ export default function Footer() {
               تواصل معنا مباشرة عبر الواتساب للحجز والاستفسار عن العروض المتاحة.
             </p>
             <a 
-              href="https://wa.me/966509996115" 
+              href="https://wa.me/966538159915" 
               target="_blank"
               className="inline-flex w-full items-center justify-center gap-2 px-6 py-3 bg-[#b8860b] text-white text-sm font-bold rounded-lg hover:bg-[#8b6508] transition-all duration-300"
             >

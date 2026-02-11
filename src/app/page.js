@@ -1,18 +1,21 @@
+"use client";
+
+import { useState } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import Apartments from "@/components/Apartments";
 import Location from "@/components/Location";
 import Footer from "@/components/Footer";
-import ScrollProgressLine from "@/components/ScrollProgressLine";
 
 export default function Home() {
+  const [activeTab, setActiveTab] = useState("safa");
+
   return (
     <main className="relative">
-      <ScrollProgressLine />
       <Header />
       <Hero />
-      <Apartments />
-      <Location />
+      <Apartments activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Location activeLocation={activeTab} setActiveLocation={setActiveTab} />
       <Footer />
     </main>
   );

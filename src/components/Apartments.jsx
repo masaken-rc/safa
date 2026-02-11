@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { MapPin, BedDouble, Bath, Coffee, Utensils, ArrowUpRight, Check, Armchair } from "lucide-react";
+import { MapPin, BedDouble, Bath, Coffee, Utensils, ArrowUpRight, Check, Armchair, Info } from "lucide-react";
 import { Romanesco } from "next/font/google";
 
 // JALL Images
@@ -39,7 +39,7 @@ const apartmentsData = {
          { icon: Armchair, text: "صالة" },
         { icon: Bath, text: "حمام مستقل" },
       ],
-      price: { monthly: 2000, yearly: 22000 },
+      price: { monthly: 2500, yearly: 30000 },
       images: getImages(0, 4),
       isPopular: false,
     },
@@ -53,7 +53,7 @@ const apartmentsData = {
         { icon: Utensils, text: "مطبخ متكامل" },
         { icon: Bath, text: "حمام مستقل" },
       ],
-      price: { monthly: 3000, yearly: 30000 },
+      price: { monthly: 3500, yearly: 36000 },
       images: getImages(4, 4),
       isPopular: true,
     },
@@ -67,7 +67,7 @@ const apartmentsData = {
         { icon: Utensils, text: "مطبخ متكامل" },
         { icon: Bath, text: "حمام مستقل" },
       ],
-      price: { monthly: 4000, yearly: 40000 },
+      price: { monthly: 4500, yearly: 54000 },
       images: getImages(8, 4),
       isPopular: false,
     },
@@ -129,7 +129,7 @@ function ImageSlider({ images, title }) {
   }, [images]);
 
   return (
-    <div className="h-64 overflow-hidden relative bg-gray-100">
+    <div className="h-56 lg:h-48 overflow-hidden relative bg-gray-100">
       <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors z-10 pointer-events-none" />
       <AnimatePresence initial={false}>
         <motion.div
@@ -153,11 +153,10 @@ function ImageSlider({ images, title }) {
   );
 }
 
-export default function Apartments() {
-  const [activeTab, setActiveTab] = useState("safa");
+export default function Apartments({ activeTab, setActiveTab }) {
 
   return (
-    <section id="apartments" className="py-24 bg-white relative">
+    <section id="apartments" className="py-24 bg-white relative font-[family-name:var(--font-ibm-plex)]">
       <div className="max-w-7xl mx-auto px-6">
         
         {/* Section Header */}
@@ -219,13 +218,14 @@ export default function Apartments() {
 
         {/* Content Grid */}
         <AnimatePresence mode="wait">
+          <div className="w-full lg:flex lg:justify-center">
           <motion.div
             key={activeTab}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.3 }}
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 gap-6 lg:max-w-6xl mx-auto"
           >
             {apartmentsData[activeTab].map((apt) => {
               const isComingSoonTab = activeTab === "nuzha";
@@ -233,9 +233,10 @@ export default function Apartments() {
               return (
                 <div 
                   key={apt.id} 
-                  className={`group relative bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-2xl hover:shadow-[#b8860b]/10 transition-all duration-500 flex flex-col ${
+                  className={`group relative bg-white border border-gray-100 rounded-none overflow-hidden hover:shadow-2xl hover:shadow-[#b8860b]/10 transition-all duration-500 flex flex-col ${
                     apt.isPopular && !isComingSoonTab ? "ring-2 ring-[#b8860b]" : ""
                   }`}
+                  style={{ clipPath: "polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px)" }}
                 >
                   {apt.isPopular && !isComingSoonTab && (
                     <div className="absolute top-4 right-4 z-20 bg-[#b8860b] text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
@@ -243,20 +244,26 @@ export default function Apartments() {
                     </div>
                   )}
 
+                  <div className="pointer-events-none absolute inset-0 z-10">
+                    <span className="absolute top-0 left-0 w-3 h-[2px] bg-[#b8860b]" />
+                    <span className="absolute top-0 right-0 w-3 h-[2px] bg-[#b8860b]" />
+                    <span className="absolute bottom-0 left-0 w-3 h-[2px] bg-[#b8860b]" />
+                    <span className="absolute bottom-0 right-0 w-3 h-[2px] bg-[#b8860b]" />
+                  </div>
                   {isComingSoonTab ? (
                     <>
                       <div className="opacity-0 pointer-events-none">
                         <ImageSlider images={apt.images} title={apt.title} />
 
-                        <div className="p-6 flex flex-col flex-grow">
-                          <h3 className="text-xl font-bold text-[#1b1b1b] mb-2">{apt.title}</h3>
-                          <p className="text-sm text-gray-500 mb-6">{apt.desc}</p>
+                        <div className="p-5 lg:p-4 flex flex-col flex-grow">
+                          <h3 className="text-lg lg:text-base font-bold text-[#1b1b1b] mb-2">{apt.title}</h3>
+                          <p className="text-sm lg:text-xs text-gray-500 mb-6">{apt.desc}</p>
 
                           <div className="space-y-3 mb-8">
                             {apt.features.map((feature, idx) => (
-                              <div key={idx} className="flex items-center gap-3 text-gray-700 text-sm">
-                                <div className="w-8 h-8 rounded-full bg-[#f9f9f9] flex items-center justify-center text-[#b8860b]">
-                                  <feature.icon className="w-4 h-4" />
+                              <div key={idx} className="flex items-center gap-3 text-gray-700 text-sm lg:text-xs">
+                                <div className="w-7 h-7 lg:w-6 lg:h-6 rounded-full bg-[#f9f9f9] flex items-center justify-center text-[#b8860b]">
+                                  <feature.icon className="w-3.5 h-3.5" />
                                 </div>
                                 {feature.text}
                               </div>
@@ -268,7 +275,7 @@ export default function Apartments() {
                               <div className="flex items-center justify-between">
                                 <span className="text-sm text-gray-600 font-medium">التكلفة الشهرية المكافئة:</span>
                           <div className="flex items-center gap-1">
-                            <span className="text-xl font-bold text-[#1b1b1b] audiowide-regular">
+                            <span className="text-lg font-bold text-[#1b1b1b] audiowide-regular">
                               {apt.price.monthly.toLocaleString("en-US")}
                             </span>
                             <span className="text-xs text-gray-500">ريال</span>
@@ -278,7 +285,7 @@ export default function Apartments() {
                               <div className="flex items-center justify-between border-t border-gray-200 pt-3">
                                 <span className="text-sm text-gray-600 font-medium">قيمة العقد السنوي:</span>
                           <div className="flex items-center gap-1">
-                            <span className="text-lg font-bold text-[#b8860b] audiowide-regular">
+                            <span className="text-base font-bold text-[#b8860b] audiowide-regular">
                               {(apt.price.monthly * 12).toLocaleString("en-US")}
                             </span>
                             <span className="text-xs text-gray-500">ريال</span>
@@ -298,26 +305,31 @@ export default function Apartments() {
                         </div>
                       </div>
                       <div className="absolute inset-0 flex items-center justify-center bg-white/80">
-                        <span className="text-xl md:text-2xl font-bold text-gray-500 tracking-wide">
+                        <span className="text-lg md:text-xl font-bold text-gray-500 tracking-wide">
                           قريباً
                         </span>
                       </div>
                     </>
                   ) : (
                     <>
-                      <ImageSlider images={apt.images} title={apt.title} />
+                      <div className="order-2">
+                        <ImageSlider images={apt.images} title={apt.title} />
+                      </div>
 
-                      <div className="p-6 flex flex-col flex-grow">
-                        <h3 className="text-xl font-bold text-[#1b1b1b] mb-2">{apt.title}</h3>
-                        <p className="text-sm text-gray-500 mb-6">{apt.desc}</p>
+                      <div className="p-5 lg:p-4 flex flex-col flex-grow order-1">
+                        <h3 className="text-base lg:text-sm font-bold text-[#1b1b1b] mb-2">{apt.title}</h3>
+                        <p className="text-xs lg:text-[11px] text-gray-500 mb-6">{apt.desc}</p>
 
-                        <div className="space-y-3 mb-8">
+                        <div className="grid grid-cols-2 gap-2 mb-4 w-full">
                           {apt.features.map((feature, idx) => (
-                            <div key={idx} className="flex items-center gap-3 text-gray-700 text-sm">
-                              <div className="w-8 h-8 rounded-full bg-[#f9f9f9] flex items-center justify-center text-[#b8860b]">
-                                <feature.icon className="w-4 h-4" />
+                            <div
+                              key={idx}
+                              className="flex items-center justify-center w-full h-8 px-2 rounded-md border border-gray-200 bg-[#f9f9f9] text-gray-700 text-[11px] whitespace-nowrap overflow-hidden text-ellipsis"
+                            >
+                              <div className="w-4 h-4 rounded-full bg-white flex items-center justify-center text-[#b8860b]">
+                                <feature.icon className="w-2.5 h-2.5" />
                               </div>
-                              {feature.text}
+                              <span className="ml-1">{feature.text}</span>
                             </div>
                           ))}
                         </div>
@@ -325,9 +337,9 @@ export default function Apartments() {
                         <div className="mt-auto pt-6 border-t border-gray-100">
                           <div className="flex flex-col gap-3 mb-6 bg-gray-50 p-4 rounded-xl border border-gray-100">
                             <div className="flex items-center justify-between">
-                              <span className="text-sm text-gray-600 font-medium">التكلفة الشهرية المكافئة:</span>
+                              <span className="text-xs text-gray-600 font-medium">التكلفة الشهرية المكافئة:</span>
                               <div className="flex items-center gap-1">
-                                <span className="text-xl font-bold text-[#1b1b1b] audiowide-regular">
+                                <span className="text-base font-bold text-[#1b1b1b] audiowide-regular">
                                   {apt.price.monthly.toLocaleString()}
                                 </span>
                                 <span className="text-xs text-gray-500">ريال</span>
@@ -335,9 +347,9 @@ export default function Apartments() {
                             </div>
                             
                             <div className="flex items-center justify-between border-t border-gray-200 pt-3">
-                              <span className="text-sm text-gray-600 font-medium">قيمة العقد السنوي:</span>
+                              <span className="text-xs text-gray-600 font-medium">قيمة العقد السنوي:</span>
                               <div className="flex items-center gap-1">
-                                <span className="text-lg font-bold text-[#b8860b] audiowide-regular">
+                                <span className="text-sm font-bold text-[#b8860b] audiowide-regular">
                                   {(apt.price.monthly * 12).toLocaleString()}
                                 </span>
                                 <span className="text-xs text-gray-500">ريال</span>
@@ -345,15 +357,20 @@ export default function Apartments() {
                             </div>
 
                             <div className="flex items-center justify-between border-t border-gray-200 pt-3">
-                              <span className="text-sm text-gray-600 font-medium">مدة العقد:</span>
-                              <span className="text-sm font-bold text-[#1b1b1b]">12 شهر</span>
+                              <span className="text-xs text-gray-600 font-medium">مدة العقد:</span>
+                              <span className="text-xs font-bold text-[#1b1b1b]">12 شهر</span>
                             </div>
                           </div>
 
+                          <div className="flex items-start gap-2 text-[10px] text-gray-500 mb-4">
+                            <Info className="w-4 h-4 text-[#b8860b] shrink-0" />
+                            <span>تنويه: الأسعار المذكورة لا تشمل الرسوم الحكومية ورسوم منصات التأجير أو رسوم الدلالة عند التعاقد.</span>
+                          </div>
+
                           <a 
-                            href={`https://wa.me/966509996115?text=أنا مهتم بـ ${apt.title}`} 
+                            href={`https://wa.me/966538159915?text=أنا مهتم بـ ${apt.title}`} 
                             target="_blank"
-                            className="w-full flex items-center justify-center gap-2 py-3 bg-[#1b1b1b] text-white rounded-lg hover:bg-[#b8860b] transition-colors duration-300 font-medium text-sm"
+                            className="w-full flex items-center justify-center gap-2 py-2.5 lg:py-2 bg-[#1b1b1b] text-white rounded-lg hover:bg-[#b8860b] transition-colors duration-300 font-medium text-xs"
                           >
                             <span>احجز الآن</span>
                             <ArrowUpRight className="w-4 h-4" />
@@ -366,6 +383,7 @@ export default function Apartments() {
               );
             })}
           </motion.div>
+          </div>
         </AnimatePresence>
 
       </div>
