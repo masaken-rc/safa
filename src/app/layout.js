@@ -23,7 +23,7 @@ const audiowide = Audiowide({
 
 export const metadata = {
   title: "مساكن الرفاهية",
-  description: "شقق مفروشة بمستوى الرفاهية",
+  description: "وحدات سكنية مفروشة للإيجار الشهري",
 };
 
 export default function RootLayout({ children }) {

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { MapPin, Navigation, Clock, ShieldCheck } from "lucide-react";
 
 // Locations Data
@@ -9,8 +10,8 @@ const locationsData = {
     name: "فرع الصفا",
     address: "4362 سهل بن رافع الخزرجى، حي الصفا، جدة 23453",
     description: "يتميز موقعنا في حي الصفا بقربه من أهم المعالم الحيوية والخدمات في جدة. سهولة الوصول إلى الطرق الرئيسية والمطار والمراكز التجارية.",
-    mapUrl: "https://maps.google.com/maps?q=4362+Sahl+Ibn+Rafi+Al+Khazraji+As+Safa+Jeddah&t=&z=15&ie=UTF8&iwloc=&output=embed",
-    googleMapsLink: "https://maps.app.goo.gl/bDXhAUNsJfCztoe58",
+    mapUrl: "https://maps.google.com/maps?q=21.5700818,39.2220244&t=&z=15&ie=UTF8&iwloc=&output=embed",
+    googleMapsLink: "https://maps.app.goo.gl/NGNuWiKVvk9CNtje6",
     access: "15 دقيقة من المطار • 10 دقائق من وسط المدينة",
     features: "منطقة سكنية متكاملة الخدمات توفر لك الهدوء والخصوصية"
   },
@@ -29,7 +30,32 @@ export default function Location({ activeLocation, setActiveLocation }) {
 
   return (
     <section id="location" className="py-24 bg-[#f9f9f9] relative overflow-hidden">
-      <div className="max-w-7xl mx-auto px-6">
+      {/* Background Pattern - Unorganized Lines */}
+      <div className="absolute inset-0 pointer-events-none">
+        <svg className="absolute w-full h-full opacity-[0.03]" viewBox="0 0 100 100" preserveAspectRatio="none">
+           {/* Random Golden Lines */}
+           <path d="M-10 20 L110 40" vectorEffect="non-scaling-stroke" stroke="#b8860b" strokeWidth="1.5" />
+           <path d="M-10 80 L110 60" vectorEffect="non-scaling-stroke" stroke="#b8860b" strokeWidth="1.5" />
+           <path d="M30 -10 L50 110" vectorEffect="non-scaling-stroke" stroke="#b8860b" strokeWidth="1.5" />
+           <path d="M70 -10 L40 110" vectorEffect="non-scaling-stroke" stroke="#b8860b" strokeWidth="1.5" />
+           <path d="M0 0 L100 100" vectorEffect="non-scaling-stroke" stroke="#b8860b" strokeWidth="1" />
+           <path d="M100 0 L0 100" vectorEffect="non-scaling-stroke" stroke="#b8860b" strokeWidth="1" />
+           
+           {/* Random Dark Lines */}
+           <path d="M10 -10 L90 110" vectorEffect="non-scaling-stroke" stroke="#000" strokeWidth="0.5" />
+           <path d="M90 -10 L10 110" vectorEffect="non-scaling-stroke" stroke="#000" strokeWidth="0.5" />
+           <path d="M-20 50 L120 50" vectorEffect="non-scaling-stroke" stroke="#000" strokeWidth="0.5" />
+        </svg>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 relative">
+        
+        {/* Corner Borders Framing */}
+        <div className="absolute -top-10 -left-6 w-24 h-24 border-t-2 border-l-2 border-[#b8860b]/20 rounded-tl-[3rem] pointer-events-none hidden lg:block" />
+        <div className="absolute -top-10 -right-6 w-24 h-24 border-t-2 border-r-2 border-[#b8860b]/20 rounded-tr-[3rem] pointer-events-none hidden lg:block" />
+        <div className="absolute -bottom-10 -left-6 w-24 h-24 border-b-2 border-l-2 border-[#b8860b]/20 rounded-bl-[3rem] pointer-events-none hidden lg:block" />
+        <div className="absolute -bottom-10 -right-6 w-24 h-24 border-b-2 border-r-2 border-[#b8860b]/20 rounded-br-[3rem] pointer-events-none hidden lg:block" />
+
         
         <div className="text-center mb-12">
           <div className="inline-block px-4 py-1 mb-6 border border-[#c5a059] text-[#c5a059] rounded-full text-sm font-medium tracking-wide">
@@ -151,36 +177,194 @@ export default function Location({ activeLocation, setActiveLocation }) {
 
             {/* Map Visual */}
             <motion.div
-              className="relative h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl border-4 border-white"
+              className="relative h-[500px] w-full overflow-hidden"
             >
-              <iframe 
-                width="100%" 
-                height="100%" 
-                frameBorder="0" 
-                scrolling="no" 
-                marginHeight="0" 
-                marginWidth="0" 
-                src={locationsData[activeLocation].mapUrl}
-                className="filter grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+              <div className="absolute inset-0 w-full h-full"
+                   style={{ 
+                     maskImage: "radial-gradient(circle, black 30%, transparent 70%)",
+                     WebkitMaskImage: "radial-gradient(circle, black 30%, transparent 70%)"
+                   }}
               >
-              </iframe>
+                <iframe 
+                  width="100%" 
+                  height="100%" 
+                  frameBorder="0" 
+                  scrolling="no" 
+                  marginHeight="0" 
+                  marginWidth="0" 
+                  src={locationsData[activeLocation].mapUrl}
+                  className="filter grayscale-[20%] hover:grayscale-0 transition-all duration-700"
+                >
+                </iframe>
+              </div>
               
               {/* Overlay Card */}
-              <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-4 rounded-xl shadow-lg border border-white/50 hidden sm:block">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-bold text-[#1b1b1b]">مساكن الرفاهية - {locationsData[activeLocation].name}</p>
-                    <p className="text-xs text-gray-500">نحن بانتظار زيارتك</p>
-                  </div>
-                  <div className="w-10 h-10 bg-[#b8860b] rounded-full flex items-center justify-center text-white">
-                    <MapPin className="w-5 h-5" />
-                  </div>
-                </div>
+              <div className="absolute bottom-6 left-6 w-16 h-16 bg-white/90 backdrop-blur-md rounded-full shadow-lg border border-white/50 flex items-center justify-center text-[#b8860b] hover:scale-110 transition-transform duration-300 hidden sm:flex" title={`مساكن الرفاهية - ${locationsData[activeLocation].name}`}>
+                <MapPin className="w-8 h-8" />
               </div>
             </motion.div>
 
           </motion.div>
         </AnimatePresence>
+
+        {/* Partners Logos */}
+        <div className="mt-20 pt-10 border-t border-gray-200 overflow-hidden">
+          
+          {/* Desktop View (Static) */}
+          <div className="hidden md:flex flex-wrap justify-center items-center gap-16">
+            
+            {/* Egar */}
+            <div className="relative w-44 h-20 hover:scale-105 transition-transform duration-300">
+               <Image 
+                 src="/images/egar.svg" 
+                 alt="منصة إيجار" 
+                 fill 
+                 className="object-contain"
+               />
+            </div>
+
+            {/* Shmoh */}
+            <div className="relative w-28 h-28 hover:scale-105 transition-transform duration-300">
+               <Image 
+                 src="/images/shmoh.png" 
+                 alt="شعار شموخ" 
+                 fill 
+                 className="object-contain"
+               />
+            </div>
+
+            {/* Masaken */}
+            <div className="relative w-28 h-28 hover:scale-105 transition-transform duration-300">
+               <Image 
+                 src="/images/masakenlogo.png" 
+                 alt="شعار مساكن" 
+                 fill 
+                 className="object-contain"
+               />
+            </div>
+
+            {/* Logo */}
+            <div className="relative w-44 h-20 hover:scale-105 transition-transform duration-300">
+               <Image 
+                 src="/images/logo.png" 
+                 alt="شعار الموقع" 
+                 fill 
+                 className="object-contain"
+                 style={{ filter: "brightness(0) saturate(100%) invert(62%) sepia(87%) saturate(348%) hue-rotate(356deg) brightness(88%) contrast(92%)" }}
+               />
+            </div>
+
+          </div>
+
+          {/* Mobile View (Marquee) */}
+          <div className="md:hidden relative w-full overflow-hidden">
+            <motion.div 
+              className="flex w-max"
+              animate={{ x: "-50%" }}
+              transition={{
+                duration: 20,
+                ease: "linear",
+                repeat: Infinity,
+              }}
+            >
+              {/* First Set of Logos (Duplicated to ensure full width coverage) */}
+              <div className="flex items-center gap-12 pr-12">
+                {[...Array(2)].map((_, i) => (
+                  <div key={`set1-${i}`} className="flex items-center gap-12">
+                    {/* Egar */}
+                    <div className="relative w-32 h-16 shrink-0">
+                       <Image 
+                         src="/images/egar.svg" 
+                         alt="منصة إيجار" 
+                         fill 
+                         className="object-contain"
+                       />
+                    </div>
+
+                    {/* Shmoh */}
+                    <div className="relative w-20 h-20 shrink-0">
+                       <Image 
+                         src="/images/shmoh.png" 
+                         alt="شعار شموخ" 
+                         fill 
+                         className="object-contain"
+                       />
+                    </div>
+
+                    {/* Masaken */}
+                    <div className="relative w-20 h-20 shrink-0">
+                       <Image 
+                         src="/images/masakenlogo.png" 
+                         alt="شعار مساكن" 
+                         fill 
+                         className="object-contain"
+                       />
+                    </div>
+
+                    {/* Logo */}
+                    <div className="relative w-32 h-16 shrink-0">
+                       <Image 
+                         src="/images/logo.png" 
+                         alt="شعار الموقع" 
+                         fill 
+                         className="object-contain"
+                         style={{ filter: "brightness(0) saturate(100%) invert(62%) sepia(87%) saturate(348%) hue-rotate(356deg) brightness(88%) contrast(92%)" }}
+                       />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Second Set of Logos (Identical to First Set for seamless loop) */}
+              <div className="flex items-center gap-12 pr-12">
+                {[...Array(2)].map((_, i) => (
+                  <div key={`set2-${i}`} className="flex items-center gap-12">
+                    {/* Egar */}
+                    <div className="relative w-32 h-16 shrink-0">
+                       <Image 
+                         src="/images/egar.svg" 
+                         alt="منصة إيجار" 
+                         fill 
+                         className="object-contain"
+                       />
+                    </div>
+
+                    {/* Shmoh */}
+                    <div className="relative w-20 h-20 shrink-0">
+                       <Image 
+                         src="/images/shmoh.png" 
+                         alt="شعار شموخ" 
+                         fill 
+                         className="object-contain"
+                       />
+                    </div>
+
+                    {/* Masaken */}
+                    <div className="relative w-20 h-20 shrink-0">
+                       <Image 
+                         src="/images/masakenlogo.png" 
+                         alt="شعار مساكن" 
+                         fill 
+                         className="object-contain"
+                       />
+                    </div>
+
+                    {/* Logo */}
+                    <div className="relative w-32 h-16 shrink-0">
+                       <Image 
+                         src="/images/logo.png" 
+                         alt="شعار الموقع" 
+                         fill 
+                         className="object-contain"
+                         style={{ filter: "brightness(0) saturate(100%) invert(62%) sepia(87%) saturate(348%) hue-rotate(356deg) brightness(88%) contrast(92%)" }}
+                       />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </div>
 
       </div>
     </section>

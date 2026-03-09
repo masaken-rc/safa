@@ -39,13 +39,13 @@ const apartmentsData = {
          { icon: Armchair, text: "صالة" },
         { icon: Bath, text: "حمام مستقل" },
       ],
-      price: { monthly: 2500, yearly: 30000 },
+      price: { monthly: "3,000 - 3,300", yearly: "36,000 - 39,600", isRange: true },
       images: getImages(0, 4),
       isPopular: false,
     },
     {
       id: "s2",
-      title: "شقة بغرفة وصالة",
+      title: "وحدة بغرفة وصالة",
       desc: "مساحة إضافية للمعيشة والراحة",
       features: [
         { icon: BedDouble, text: "غرفة نوم" },
@@ -53,13 +53,13 @@ const apartmentsData = {
         { icon: Utensils, text: "مطبخ متكامل" },
         { icon: Bath, text: "حمام مستقل" },
       ],
-      price: { monthly: 3500, yearly: 36000 },
+      price: { monthly: "3,000 - 3,550", yearly: "36,000 - 42,600", isRange: true },
       images: getImages(4, 4),
       isPopular: true,
     },
     {
       id: "s3",
-      title: "شقة غرفتين وصالة",
+      title: "وحدة غرفتين وصالة",
       desc: "للعائلات الصغيرة، رفاهية متكاملة",
       features: [
         { icon: BedDouble, text: "غرفتين نوم" },
@@ -67,7 +67,7 @@ const apartmentsData = {
         { icon: Utensils, text: "مطبخ متكامل" },
         { icon: Bath, text: "حمام مستقل" },
       ],
-      price: { monthly: 4500, yearly: 54000 },
+      price: { monthly: 4500, yearly: 54000, isRange: false },
       images: getImages(8, 4),
       isPopular: false,
     },
@@ -75,8 +75,8 @@ const apartmentsData = {
   nuzha: [
     {
       id: "n1",
-      title: "غرفة وصالة",
-      desc: "سعر مناسب وتجهيزات فندقية",
+      title: "وحدة بغرفة وصالة",
+      desc: "سعر مناسب وتجهيزات سكنية",
       features: [
         { icon: BedDouble, text: "غرفة نوم" },
          { icon: Armchair, text: "صالة" },
@@ -89,7 +89,7 @@ const apartmentsData = {
     },
     {
       id: "n2",
-      title: "سويت بغرفة وصالة",
+      title: "وحدة بغرفة وصالة",
       desc: "تصميم مفتوح وإضاءة طبيعية",
       features: [
         { icon: BedDouble, text: "غرفة نوم" },
@@ -103,7 +103,7 @@ const apartmentsData = {
     },
     {
       id: "n3",
-      title: "غرفتين وصالة",
+      title: "وحدة غرفتين وصالة",
       desc: "أقصى درجات الفخامة والخصوصية",
       features: [
         { icon: BedDouble, text: "غرفتين " },
@@ -156,8 +156,32 @@ function ImageSlider({ images, title }) {
 export default function Apartments({ activeTab, setActiveTab }) {
 
   return (
-    <section id="apartments" className="py-24 bg-white relative font-[family-name:var(--font-ibm-plex)]">
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="apartments" className="py-24 relative font-[family-name:var(--font-ibm-plex)] bg-gradient-to-b from-gray-50 via-white to-gray-50 overflow-hidden">
+      {/* Background Pattern - Unorganized Lines */}
+      <div className="absolute inset-0 pointer-events-none">
+        <svg className="absolute w-full h-full opacity-[0.03]" viewBox="0 0 100 100" preserveAspectRatio="none">
+           {/* Random Golden Lines */}
+           <path d="M-10 20 L110 40" vectorEffect="non-scaling-stroke" stroke="#b8860b" strokeWidth="1.5" />
+           <path d="M-10 80 L110 60" vectorEffect="non-scaling-stroke" stroke="#b8860b" strokeWidth="1.5" />
+           <path d="M30 -10 L50 110" vectorEffect="non-scaling-stroke" stroke="#b8860b" strokeWidth="1.5" />
+           <path d="M70 -10 L40 110" vectorEffect="non-scaling-stroke" stroke="#b8860b" strokeWidth="1.5" />
+           <path d="M0 0 L100 100" vectorEffect="non-scaling-stroke" stroke="#b8860b" strokeWidth="1" />
+           <path d="M100 0 L0 100" vectorEffect="non-scaling-stroke" stroke="#b8860b" strokeWidth="1" />
+           
+           {/* Random Dark Lines */}
+           <path d="M10 -10 L90 110" vectorEffect="non-scaling-stroke" stroke="#000" strokeWidth="0.5" />
+           <path d="M90 -10 L10 110" vectorEffect="non-scaling-stroke" stroke="#000" strokeWidth="0.5" />
+           <path d="M-20 50 L120 50" vectorEffect="non-scaling-stroke" stroke="#000" strokeWidth="0.5" />
+        </svg>
+      </div>
+
+      <div className="relative max-w-7xl mx-auto px-6">
+        
+        {/* Corner Borders Framing */}
+        <div className="absolute -top-10 -left-6 w-24 h-24 border-t-2 border-l-2 border-[#b8860b]/20 rounded-tl-[3rem] pointer-events-none hidden lg:block" />
+        <div className="absolute -top-10 -right-6 w-24 h-24 border-t-2 border-r-2 border-[#b8860b]/20 rounded-tr-[3rem] pointer-events-none hidden lg:block" />
+        <div className="absolute -bottom-10 -left-6 w-24 h-24 border-b-2 border-l-2 border-[#b8860b]/20 rounded-bl-[3rem] pointer-events-none hidden lg:block" />
+        <div className="absolute -bottom-10 -right-6 w-24 h-24 border-b-2 border-r-2 border-[#b8860b]/20 rounded-br-[3rem] pointer-events-none hidden lg:block" />
         
         {/* Section Header */}
         <div className="text-center mb-16">
@@ -233,10 +257,9 @@ export default function Apartments({ activeTab, setActiveTab }) {
               return (
                 <div 
                   key={apt.id} 
-                  className={`group relative bg-white border border-gray-100 rounded-none overflow-hidden hover:shadow-2xl hover:shadow-[#b8860b]/10 transition-all duration-500 flex flex-col ${
-                    apt.isPopular && !isComingSoonTab ? "ring-2 ring-[#b8860b]" : ""
+                  className={`group relative bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-[#b8860b]/10 hover:-translate-y-1 transition-all duration-300 flex flex-col ${
+                    apt.isPopular && !isComingSoonTab ? "ring-1 ring-[#b8860b]/50" : ""
                   }`}
-                  style={{ clipPath: "polygon(10px 0, calc(100% - 10px) 0, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px), 0 10px)" }}
                 >
                   {apt.isPopular && !isComingSoonTab && (
                     <div className="absolute top-4 right-4 z-20 bg-[#b8860b] text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
@@ -273,24 +296,26 @@ export default function Apartments({ activeTab, setActiveTab }) {
                           <div className="mt-auto pt-6 border-t border-gray-100">
                             <div className="flex flex-col gap-3 mb-6 bg-gray-50 p-4 rounded-xl border border-gray-100">
                               <div className="flex items-center justify-between">
-                                <span className="text-sm text-gray-600 font-medium">التكلفة الشهرية المكافئة:</span>
-                          <div className="flex items-center gap-1">
-                            <span className="text-lg font-bold text-[#1b1b1b] audiowide-regular">
-                              {apt.price.monthly.toLocaleString("en-US")}
-                            </span>
-                            <span className="text-xs text-gray-500">ريال</span>
-                          </div>
+                              <span className="text-sm text-gray-600 font-medium">التكلفة الشهرية المكافئة:</span>
+                              <div className="flex items-center gap-1">
+                                <span className="text-lg font-bold text-[#1b1b1b] audiowide-regular">
+                                  {typeof apt.price.monthly === 'number' ? apt.price.monthly.toLocaleString("en-US") : apt.price.monthly}
+                                </span>
+                                <span className="text-xs text-gray-500">ريال</span>
                               </div>
-                              
-                              <div className="flex items-center justify-between border-t border-gray-200 pt-3">
-                                <span className="text-sm text-gray-600 font-medium">قيمة العقد السنوي:</span>
-                          <div className="flex items-center gap-1">
-                            <span className="text-base font-bold text-[#b8860b] audiowide-regular">
-                              {(apt.price.monthly * 12).toLocaleString("en-US")}
-                            </span>
-                            <span className="text-xs text-gray-500">ريال</span>
-                          </div>
+                            </div>
+                            
+                            <div className="flex items-center justify-between border-t border-gray-200 pt-3">
+                              <span className="text-sm text-gray-600 font-medium">قيمة العقد السنوي:</span>
+                              <div className="flex items-center gap-1">
+                                <span className="text-base font-bold text-[#b8860b] audiowide-regular">
+                                  {apt.price.isRange || typeof apt.price.yearly === 'string' 
+                                    ? apt.price.yearly 
+                                    : (apt.price.monthly * 12).toLocaleString("en-US")}
+                                </span>
+                                <span className="text-xs text-gray-500">ريال</span>
                               </div>
+                            </div>
 
                               <div className="flex items-center justify-between border-t border-gray-200 pt-3">
                                 <span className="text-sm text-gray-600 font-medium">مدة العقد:</span>
@@ -340,7 +365,7 @@ export default function Apartments({ activeTab, setActiveTab }) {
                               <span className="text-xs text-gray-600 font-medium">التكلفة الشهرية المكافئة:</span>
                               <div className="flex items-center gap-1">
                                 <span className="text-base font-bold text-[#1b1b1b] audiowide-regular">
-                                  {apt.price.monthly.toLocaleString()}
+                                  {typeof apt.price.monthly === 'number' ? apt.price.monthly.toLocaleString("en-US") : apt.price.monthly}
                                 </span>
                                 <span className="text-xs text-gray-500">ريال</span>
                               </div>
@@ -350,7 +375,9 @@ export default function Apartments({ activeTab, setActiveTab }) {
                               <span className="text-xs text-gray-600 font-medium">قيمة العقد السنوي:</span>
                               <div className="flex items-center gap-1">
                                 <span className="text-sm font-bold text-[#b8860b] audiowide-regular">
-                                  {(apt.price.monthly * 12).toLocaleString()}
+                                  {apt.price.isRange || typeof apt.price.yearly === 'string' 
+                                    ? apt.price.yearly 
+                                    : (apt.price.monthly * 12).toLocaleString("en-US")}
                                 </span>
                                 <span className="text-xs text-gray-500">ريال</span>
                               </div>

@@ -44,7 +44,7 @@ export default function Header() {
             href="#apartments"
             className="relative hover:text-[#b8860b] transition-colors duration-300 after:content-[''] after:absolute after:-bottom-1 after:right-0 after:h-[2px] after:w-0 after:bg-[#b8860b] after:transition-all after:duration-300 hover:after:w-full"
           >
-            الشقق
+            الوحدات
           </Link>
           <Link
             href="#location"
