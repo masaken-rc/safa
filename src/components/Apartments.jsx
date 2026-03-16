@@ -5,26 +5,17 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { MapPin, BedDouble, Bath, Coffee, Utensils, ArrowUpRight, Check, Armchair, Info } from "lucide-react";
 import { Romanesco } from "next/font/google";
+import { CONTACT_INFO } from "@/constants";
 
 // JALL Images
-const jallImages = [
-  "aaron-huber-G7sE2S4Lab4-unsplash.jpg",
-  "cat-han-VgyN_CWXQVM-unsplash.jpg",
-  "chastity-cortijo-6TY_WrJTwSI-unsplash.jpg",
-  "lisha-riabinina-qifUgNsrWmU-unsplash.jpg",
-  "lotus-design-n-print-oCw5_evbWyI-unsplash.jpg",
-  "mark-champs-Id2IIl1jOB0-unsplash.jpg",
-  "naomi-hebert-MP0bgaS_d1c-unsplash.jpg",
-  "point3d-commercial-imaging-ltd-5BV56SdvLmo-unsplash.jpg",
-  "point3d-commercial-imaging-ltd-oxeCZrodz78-unsplash.jpg",
-  "reisetopia-aI6Su7Mu9Ro-unsplash.jpg",
-
-].map(img => `/images/JALL/${img}`);
+const jallImages = Array.from({ length: 11 }, (_, i) => `/images/JALL/${i + 1}.jpeg`);
 
 // Helper to distribute images
 const getImages = (startIndex, count) => {
   return Array.from({ length: count }, (_, i) => jallImages[(startIndex + i) % jallImages.length]);
 };
+
+const buildWhatsAppUrl = (message) => `${CONTACT_INFO.whatsappUrl}?text=${encodeURIComponent(message)}`;
 
 // Apartment Data
 const apartmentsData = {
@@ -395,7 +386,7 @@ export default function Apartments({ activeTab, setActiveTab }) {
                           </div>
 
                           <a 
-                            href={`https://wa.me/966538159915?text=أنا مهتم بـ ${apt.title}`} 
+                            href={buildWhatsAppUrl(`أنا مهتم بـ ${apt.title}`)} 
                             target="_blank"
                             className="w-full flex items-center justify-center gap-2 py-2.5 lg:py-2 bg-[#1b1b1b] text-white rounded-lg hover:bg-[#b8860b] transition-colors duration-300 font-medium text-xs"
                           >

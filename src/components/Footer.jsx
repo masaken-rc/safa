@@ -4,8 +4,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Phone, Mail, MapPin, Instagram, Twitter, Facebook, ArrowUp } from "lucide-react";
+import { CONTACT_INFO } from "@/constants";
 
 export default function Footer() {
+  const phoneDisplay = "+966 50 884 7996";
+
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -50,6 +53,15 @@ export default function Footer() {
               نقدم تجربة سكنية استثنائية تجمع بين الفخامة والراحة في أرقى أحياء جدة. خيارك الأول للإقامة المتميزة.
             </p>
             <div className="flex gap-4">
+              <a
+                href={CONTACT_INFO.tiktokUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#b8860b] hover:text-white transition-all duration-300"
+                aria-label="TikTok"
+              >
+                <span className="text-[10px] font-bold tracking-wide">TikTok</span>
+              </a>
               <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#b8860b] hover:text-white transition-all duration-300">
                 <Twitter className="w-5 h-5" />
               </a>
@@ -93,11 +105,35 @@ export default function Footer() {
             <ul className="space-y-4 text-sm text-gray-400">
               <li className="flex items-start gap-3">
                 <Phone className="w-5 h-5 text-[#b8860b] shrink-0" />
-                <span className="audiowide-regular" dir="ltr">+966 538159915</span>
+                <a
+                  href={`tel:${CONTACT_INFO.phoneLocal}`}
+                  className="audiowide-regular hover:text-white transition-colors"
+                  dir="ltr"
+                >
+                  {phoneDisplay}
+                </a>
               </li>
               <li className="flex items-start gap-3">
                 <Mail className="w-5 h-5 text-[#b8860b] shrink-0" />
-                <span>MSC22@OUTLOOK.SA</span>
+                <a
+                  href={`mailto:${CONTACT_INFO.email}`}
+                  className="hover:text-white transition-colors"
+                >
+                  {CONTACT_INFO.email}
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <div className="w-5 h-5 text-[#b8860b] shrink-0 flex items-center justify-center">
+                  <span className="text-[10px] font-bold">TT</span>
+                </div>
+                <a
+                  href={CONTACT_INFO.tiktokUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  TikTok: @shmokhalrfahya
+                </a>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-[#b8860b] shrink-0" />
@@ -113,7 +149,7 @@ export default function Footer() {
               تواصل معنا مباشرة عبر الواتساب للاستفسار عن العروض والوحدات المتاحة.
             </p>
             <a 
-              href="https://wa.me/966538159915" 
+              href={CONTACT_INFO.whatsappUrl}
               target="_blank"
               className="inline-flex w-full items-center justify-center gap-2 px-6 py-3 bg-[#b8860b] text-white text-sm font-bold rounded-lg hover:bg-[#8b6508] transition-all duration-300"
             >

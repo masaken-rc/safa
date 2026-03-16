@@ -4,6 +4,7 @@ import { motion, animate } from "framer-motion";
 import Image from "next/image";
 import { ArrowLeft, Star, MapPin, Wifi } from "lucide-react";
 import { useEffect, useState } from "react";
+import { CONTACT_INFO } from "@/constants";
 
 function Counter({ value, suffix = "", duration = 1.6 }) {
   const [display, setDisplay] = useState(0);
@@ -103,7 +104,7 @@ export default function Hero() {
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href="https://wa.me/966538159915"
+              href={CONTACT_INFO.whatsappUrl}
               target="_blank"
               className="flex items-center justify-center px-8 py-4 lg:px-4 lg:py-2 bg-white/10 backdrop-blur-md border-2 border-white/30 text-white text-base lg:text-xs font-bold rounded-xl hover:bg-white hover:text-[#1b1b1b] transition-all duration-300"
             >
