@@ -208,7 +208,7 @@ export default function Location({ activeLocation, setActiveLocation }) {
         </AnimatePresence>
 
         {/* Partners Logos */}
-        <div className="mt-20 pt-10 border-t border-gray-200 overflow-hidden">
+        <div className="mt-20 pt-10 border-t border-gray-100 overflow-hidden">
           
           {/* Desktop View (Static) */}
           <div className="hidden md:flex flex-wrap justify-center items-center gap-16">
@@ -256,112 +256,43 @@ export default function Location({ activeLocation, setActiveLocation }) {
 
           </div>
 
-          {/* Mobile View (Marquee) */}
-          <div className="md:hidden relative w-full overflow-hidden">
+          {/* Mobile View (Marquee) - Seamless Continuous Loop */}
+          <div className="md:hidden relative w-full h-24 overflow-hidden flex items-center">
             <motion.div 
               className="flex w-max"
-              animate={{ x: "-50%" }}
+              animate={{ x: [0, "-50%"] }}
               transition={{
-                duration: 20,
+                duration: 15,
                 ease: "linear",
                 repeat: Infinity,
               }}
             >
-              {/* First Set of Logos (Duplicated to ensure full width coverage) */}
-              <div className="flex items-center gap-12 pr-12">
-                {[...Array(2)].map((_, i) => (
-                  <div key={`set1-${i}`} className="flex items-center gap-12">
-                    {/* Egar */}
-                    <div className="relative w-32 h-16 shrink-0">
-                       <Image 
-                         src="/images/egar.svg" 
-                         alt="منصة إيجار" 
-                         fill 
-                         className="object-contain"
-                       />
-                    </div>
-
-                    {/* Shmoh */}
-                    <div className="relative w-20 h-20 shrink-0">
-                       <Image 
-                         src="/images/shmoh.png" 
-                         alt="شعار شموخ" 
-                         fill 
-                         className="object-contain"
-                       />
-                    </div>
-
-                    {/* Masaken */}
-                    <div className="relative w-20 h-20 shrink-0">
-                       <Image 
-                         src="/images/masakenlogo.png" 
-                         alt="شعار مساكن" 
-                         fill 
-                         className="object-contain"
-                       />
-                    </div>
-
-                    {/* Logo */}
-                    <div className="relative w-32 h-16 shrink-0">
-                       <Image 
-                         src="/images/logo.png" 
-                         alt="شعار الموقع" 
-                         fill 
-                         className="object-contain"
-                         style={{ filter: "brightness(0) saturate(100%) invert(62%) sepia(87%) saturate(348%) hue-rotate(356deg) brightness(88%) contrast(92%)" }}
-                       />
-                    </div>
+              {[1, 2].map((set) => (
+                <div key={`set-${set}`} className="flex items-center gap-12 pr-12 shrink-0">
+                  {/* Egar */}
+                  <div className="relative w-28 h-10">
+                     <Image src="/images/egar.svg" alt="منصة إيجار" fill className="object-contain" />
                   </div>
-                ))}
-              </div>
-
-              {/* Second Set of Logos (Identical to First Set for seamless loop) */}
-              <div className="flex items-center gap-12 pr-12">
-                {[...Array(2)].map((_, i) => (
-                  <div key={`set2-${i}`} className="flex items-center gap-12">
-                    {/* Egar */}
-                    <div className="relative w-32 h-16 shrink-0">
-                       <Image 
-                         src="/images/egar.svg" 
-                         alt="منصة إيجار" 
-                         fill 
-                         className="object-contain"
-                       />
-                    </div>
-
-                    {/* Shmoh */}
-                    <div className="relative w-20 h-20 shrink-0">
-                       <Image 
-                         src="/images/shmoh.png" 
-                         alt="شعار شموخ" 
-                         fill 
-                         className="object-contain"
-                       />
-                    </div>
-
-                    {/* Masaken */}
-                    <div className="relative w-20 h-20 shrink-0">
-                       <Image 
-                         src="/images/masakenlogo.png" 
-                         alt="شعار مساكن" 
-                         fill 
-                         className="object-contain"
-                       />
-                    </div>
-
-                    {/* Logo */}
-                    <div className="relative w-32 h-16 shrink-0">
-                       <Image 
-                         src="/images/logo.png" 
-                         alt="شعار الموقع" 
-                         fill 
-                         className="object-contain"
-                         style={{ filter: "brightness(0) saturate(100%) invert(62%) sepia(87%) saturate(348%) hue-rotate(356deg) brightness(88%) contrast(92%)" }}
-                       />
-                    </div>
+                  {/* Shmoh */}
+                  <div className="relative w-14 h-14">
+                     <Image src="/images/shmoh.png" alt="شعار شموخ" fill className="object-contain" />
                   </div>
-                ))}
-              </div>
+                  {/* Masaken */}
+                  <div className="relative w-14 h-14">
+                     <Image src="/images/masakenlogo.png" alt="شعار مساكن" fill className="object-contain" />
+                  </div>
+                  {/* Logo */}
+                  <div className="relative w-28 h-10">
+                     <Image 
+                       src="/images/logo.png" 
+                       alt="شعار الموقع" 
+                       fill 
+                       className="object-contain"
+                       style={{ filter: "brightness(0) saturate(100%) invert(62%) sepia(87%) saturate(348%) hue-rotate(356deg) brightness(88%) contrast(92%)" }}
+                     />
+                  </div>
+                </div>
+              ))}
             </motion.div>
           </div>
         </div>

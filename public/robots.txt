@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://residence.masaken-rc.com.sa/sitemap.xml

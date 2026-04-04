@@ -22,8 +22,25 @@ const audiowide = Audiowide({
 });
 
 export const metadata = {
-  title: "مساكن الرفاهية",
-  description: "وحدات سكنية مفروشة للإيجار الشهري",
+  metadataBase: new URL("https://residence.masaken-rc.com.sa"),
+  title: "مساكن الرفاهية - شقق فندقية فاخرة للإيجار بجدة",
+  description: "نقدم لك أرقى الشقق السكنية والفندقية المفروشة للإيجار الشهري في جدة (حي الصفا وحي النزهة). استمتع بالفخامة والراحة في مساكن الرفاهية.",
+  keywords: "شقق للإيجار، شقق مفروشة، جدة، حي الصفا، حي النزهة، مساكن الرفاهية، إيجار شهري",
+  icons: {
+    icon: "/images/logo.png",
+    shortcut: "/images/logo.png",
+    apple: "/images/logo.png",
+  },
+  openGraph: {
+    title: "مساكن الرفاهية - شقق فندقية فاخرة للإيجار بجدة",
+    description: "أرقى الشقق السكنية المفروشة للإيجار الشهري في جدة.",
+    images: ["/images/logo.png"],
+    locale: "ar_SA",
+    type: "website",
+  },
+  alternates: {
+    canonical: "/",
+  },
 };
 
 export default function RootLayout({ children }) {
